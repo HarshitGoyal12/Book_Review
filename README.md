@@ -201,12 +201,16 @@ curl -X POST http://localhost:3000/api/v1/books/BOOK_ID_HERE/reviews \
 
 
 
-![Create Book Screenshot](outputs/postman/SignIn.png)
-![Create Book Screenshot](outputs/postman/loginnew.png)
-![Create Book Screenshot](outputs/postman/createbook.png)
-![Create Book Screenshot](outputs/postman/getallbooks.png)
-![Create Book Screenshot](outputs/postman/getBookById.png)
-![Create Book Screenshot](outputs/postman/SearchByQuery.png)
-![Create Book Screenshot](outputs/postman/addreview.png)
-![Create Book Screenshot](outputs/postman/updateReview.png)
-![Create Book Screenshot](outputs/postman/userPrfile.png)
+![Postman Screenshot](outputs/postman/SignIn.png)
+![Postman Screenshot](outputs/postman/loginnew.png)
+![Postman Screenshot](outputs/postman/createbook.png)
+![Postman Screenshot](outputs/postman/getallbooks.png)
+![Postman Screenshot](outputs/postman/getBookById.png)
+![Postman Screenshot](outputs/postman/SearchByQuery.png)
+![Postman Screenshot](outputs/postman/addreview.png)
+![Postman Screenshot](outputs/postman/updateReview.png)
+![Postman Screenshot](outputs/postman/userPrfile.png)
+
+![DB Screenshot](outputs/db_outputs/books_db.png)
+![DB Screenshot](outputs/db_outputs/rating_db.png)
+![DB Screenshot](outputs/db_outputs/user_db.png)
