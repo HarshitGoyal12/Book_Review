@@ -209,8 +209,8 @@ curl -X POST http://localhost:3000/api/v1/books/BOOK_ID_HERE/reviews \
 ![Postman Screenshot](outputs/postman/SearchByQuery.png)
 ![Postman Screenshot](outputs/postman/addreview.png)
 ![Postman Screenshot](outputs/postman/updateReview.png)
-![Postman Screenshot](outputs/postman/userPrfile.png)
+![Postman Screenshot](outputs/postman/userProfile.png)
 
-![DB Screenshot](outputs/db_outputs/books_db.png)
+![DB Screenshot](outputs/db_outputs/book_db.png)
 ![DB Screenshot](outputs/db_outputs/rating_db.png)
 ![DB Screenshot](outputs/db_outputs/user_db.png)
