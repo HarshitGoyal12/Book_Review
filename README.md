@@ -198,3 +198,15 @@ curl -X POST http://localhost:3000/api/v1/books/BOOK_ID_HERE/reviews \
 - Add user roles (admin, moderator)
 - Add more advanced filtering and sorting options
 - Add unit and integration tests
+
+
+
+![Create Book Screenshot](outputs/postman/SignIn.png)
+![Create Book Screenshot](outputs/postman/loginnew.png)
+![Create Book Screenshot](outputs/postman/createbook.png)
+![Create Book Screenshot](outputs/postman/getallbooks.png)
+![Create Book Screenshot](outputs/postman/getBookById.png)
+![Create Book Screenshot](outputs/postman/SearchByQuery.png)
+![Create Book Screenshot](outputs/postman/addreview.png)
+![Create Book Screenshot](outputs/postman/updateReview.png)
+![Create Book Screenshot](outputs/postman/userPrfile.png)
