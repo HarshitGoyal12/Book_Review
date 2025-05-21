@@ -1,22 +1,40 @@
-Book Review API
+# Book Review API
+
 A RESTful API for a Book Review system built with Node.js, Express, and MongoDB.
-Features
 
-User authentication with JWT
-CRUD operations for books and reviews
-Pagination and filtering
-Search functionality
-Average ratings for books
+## Features
 
-Database Schema
-User Model
+- User authentication with JWT
+- CRUD operations for books and reviews
+- Pagination and filtering
+- Search functionality
+- Average ratings for books
+
+## Table of Contents
+
+- [Database Schema](#database-schema)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running the Application](#running-the-application)
+- [API Endpoints](#api-endpoints)
+- [Example API Requests](#example-api-requests)
+- [Design Decisions](#design-decisions)
+- [Future Improvements](#future-improvements)
+
+## Database Schema
+
+### User Model
+```
 {
   name: String,
   email: String (unique),
   password: String (hashed),
   createdAt: Date
 }
-Book Model
+```
+
+### Book Model
+```
 {
   title: String,
   author: String,
@@ -28,7 +46,10 @@ Book Model
   createdAt: Date,
   user: ObjectId (reference to User)
 }
-Review Model
+```
+
+### Review Model
+```
 {
   rating: Number (1-5),
   comment: String,
@@ -36,57 +57,77 @@ Review Model
   book: ObjectId (reference to Book),
   user: ObjectId (reference to User)
 }
-Prerequisites
+```
 
-Node.js (v14+)
-MongoDB (local or Atlas)
-npm or yarn
+## Prerequisites
 
-Installation
+- Node.js (v14+)
+- MongoDB (local or Atlas)
+- npm or yarn
 
-Clone the repository
+## Installation
 
-git clone https://github.com/yourusername/book-review-api.git
-cd book-review-api
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/book-review-api.git
+   cd book-review-api
+   ```
 
-Install dependencies
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-npm install
+3. **Set up environment variables**
+   
+   Create a `.env` file in the root directory with the following content:
+   ```
+   PORT=3000
+   MONGODB_URI=mongodb://localhost:27017/book-review-api
+   JWT_SECRET=your_jwt_secret_key_here
+   JWT_EXPIRE=7d
+   ```
 
-Set up environment variables
-Create a .env file in the root directory with the following content:
+## Running the Application
 
-PORT=3000
-MONGODB_URI=mongodb://localhost:27017/book-review-api
-JWT_SECRET=your_jwt_secret_key_here
-JWT_EXPIRE=7d
-Running the Application
-Development Mode
+### Development Mode
+```bash
 npm run dev
-Production Mode
+```
+
+### Production Mode
+```bash
 npm start
-API Endpoints
-Authentication Routes
+```
 
-POST /api/v1/auth/signup - Register a new user
-POST /api/v1/auth/login - Authenticate and return a token
-GET /api/v1/auth/me - Get current logged in user (Protected)
+## API Endpoints
 
-Book Routes
+### Authentication Routes
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| POST | `/api/v1/auth/signup` | Register a new user | Public |
+| POST | `/api/v1/auth/login` | Authenticate and return a token | Public |
+| GET | `/api/v1/auth/me` | Get current logged in user | Protected |
 
-POST /api/v1/books - Add a new book (Protected)
-GET /api/v1/books - Get all books (with pagination and optional filters)
-GET /api/v1/books/:id - Get book details by ID (includes average rating and reviews)
-GET /api/v1/books/search - Search books by title or author
+### Book Routes
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| POST | `/api/v1/books` | Add a new book | Protected |
+| GET | `/api/v1/books` | Get all books (with pagination and filters) | Public |
+| GET | `/api/v1/books/:id` | Get book details by ID | Public |
+| GET | `/api/v1/books/search` | Search books by title or author | Public |
 
-Review Routes
+### Review Routes
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| POST | `/api/v1/books/:bookId/reviews` | Submit a review for a book | Protected |
+| PUT | `/api/v1/reviews/:id` | Update your own review | Protected |
+| DELETE | `/api/v1/reviews/:id` | Delete your own review | Protected |
 
-POST /api/v1/books/:bookId/reviews - Submit a review for a book (Protected)
-PUT /api/v1/reviews/:id - Update your own review (Protected)
-DELETE /api/v1/reviews/:id - Delete your own review (Protected)
+## Example API Requests
 
-Example API Requests
-Register a New User
+### Register a New User
+```bash
 curl -X POST http://localhost:3000/api/v1/auth/signup \
   -H "Content-Type: application/json" \
   -d '{
@@ -94,14 +135,20 @@ curl -X POST http://localhost:3000/api/v1/auth/signup \
     "email": "john@example.com",
     "password": "password123"
   }'
-Login
+```
+
+### Login
+```bash
 curl -X POST http://localhost:3000/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "john@example.com",
     "password": "password123"
   }'
-Create a Book (Authenticated)
+```
+
+### Create a Book (Authenticated)
+```bash
 curl -X POST http://localhost:3000/api/v1/books \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_TOKEN_HERE" \
@@ -113,11 +160,20 @@ curl -X POST http://localhost:3000/api/v1/books \
     "publishedYear": 1925,
     "publisher": "Charles Scribner'\''s Sons"
   }'
-Get All Books with Pagination
+```
+
+### Get All Books with Pagination
+```bash
 curl -X GET "http://localhost:3000/api/v1/books?page=1&limit=10&genre=Classic"
-Search for Books
+```
+
+### Search for Books
+```bash
 curl -X GET "http://localhost:3000/api/v1/books/search?query=gatsby"
-Add a Review for a Book (Authenticated)
+```
+
+### Add a Review for a Book (Authenticated)
+```bash
 curl -X POST http://localhost:3000/api/v1/books/BOOK_ID_HERE/reviews \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_TOKEN_HERE" \
@@ -125,18 +181,20 @@ curl -X POST http://localhost:3000/api/v1/books/BOOK_ID_HERE/reviews \
     "rating": 5,
     "comment": "This is an amazing book! Highly recommended."
   }'
-Design Decisions
+```
 
-Authentication: JWT was chosen for its stateless nature and scalability.
-Database Schema: Relationships between books, users, and reviews are established using MongoDB references.
-Error Handling: Centralized error handling middleware for consistent error responses.
-Pagination: Implemented pagination for books and reviews to optimize performance.
-Search: Case-insensitive search functionality for book titles and authors.
+## Design Decisions
 
-Future Improvements
+1. **Authentication**: JWT was chosen for its stateless nature and scalability.
+2. **Database Schema**: Relationships between books, users, and reviews are established using MongoDB references.
+3. **Error Handling**: Centralized error handling middleware for consistent error responses.
+4. **Pagination**: Implemented pagination for books and reviews to optimize performance.
+5. **Search**: Case-insensitive search functionality for book titles and authors.
 
-Add book cover image upload
-Implement rate limiting
-Add user roles (admin, moderator)
-Add more advanced filtering and sorting options
-Add unit and integration tests
+## Future Improvements
+
+- Add book cover image upload
+- Implement rate limiting
+- Add user roles (admin, moderator)
+- Add more advanced filtering and sorting options
+- Add unit and integration tests
